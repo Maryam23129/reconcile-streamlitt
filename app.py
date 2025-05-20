@@ -71,7 +71,7 @@ if bank_file:
     st.sidebar.markdown(f"✅ File rekening: `{bank_file.name}`")
 
 # ===================== Header =====================
-st.title("📊 Dashboard Rekonsiliasi Keuangan")
+st.title("📊 Dashboard Rekonsiliasi Pendapatan Ticketing")
 st.markdown("""
 Bandingkan file invoice dan rekening koran Anda untuk menemukan transaksi yang cocok dan tidak cocok.
 """)
