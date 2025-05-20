@@ -23,8 +23,19 @@ section[data-testid="stSidebar"] {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    background: linear-gradient(135deg, #a8edea, #61a0af);
-    color: #000;
+    background: #011627;
+    color: #ffffff;
+    border-right: 2px solid #003366;
+}
+section[data-testid="stSidebar"] .stButton>button, .stDownloadButton>button {
+    background-color: #005f73;
+    color: white;
+    border-radius: 6px;
+    border: none;
+}
+section[data-testid="stSidebar"] .stButton>button:hover, .stDownloadButton>button:hover {
+    background-color: #0a9396;
+    transform: scale(1.03);
 }
 .stButton>button, .stDownloadButton>button {
     transition: background-color 0.3s ease, transform 0.2s ease;
