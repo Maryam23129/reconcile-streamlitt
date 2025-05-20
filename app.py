@@ -2,53 +2,57 @@ import streamlit as st
 import pandas as pd
 from datetime import timedelta
 from io import BytesIO
+import plotly.express as px
 
-# Konfigurasi halaman
 st.set_page_config(
     page_title="Rekonsiliasi Keuangan",
     layout="wide",
     page_icon="📊"
 )
 
-# Gaya CSS tema pastel
 st.markdown("""
 <style>
 html, body, [class*="css"]  {
-    background-color: #f7f1f0;
+    background-color: #f0f4f8;
     font-family: 'Segoe UI', sans-serif;
-    color: #444;
+    color: #2c3e50;
 }
-.stButton>button {
-    background-color: #ffd1dc;
-    color: black;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    padding: 0.4em 1.2em;
+.sidebar .sidebar-content {
+    background-color: #eaf0f6;
+    padding: 1.5em;
 }
-.stDownloadButton>button {
-    background-color: #d4f5dd;
-    color: black;
-    border: none;
-    border-radius: 8px;
+.stButton>button, .stDownloadButton>button {
+    background-color: #4CAF50;
+    color: white;
     font-weight: bold;
-    padding: 0.4em 1.2em;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.5em;
+    margin-top: 10px;
+}
+.stDataFrame, .dataframe {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1em;
+}
+.metric-container {
+    display: flex;
+    gap: 2em;
+    justify-content: flex-start;
 }
 </style>
 """, unsafe_allow_html=True)
 
-# Header utama
-st.title("📊 Aplikasi Rekonsiliasi Pendapatan Ticketing")
+st.title("📊 Dashboard Rekonsiliasi Keuangan")
 st.markdown("""
-Aplikasi ini membandingkan data **invoice** dan **rekening koran**,
-mendeteksi transaksi yang cocok dan yang tidak sesuai.
-Silakan upload file pada sidebar untuk memulai.
+Bandingkan dan cocokkan transaksi dari data Invoice dan Rekening Koran secara otomatis. 
+Gunakan grafik dan tab untuk menganalisis transaksi yang cocok dan yang belum.
 """)
 
-# Upload file
+# Sidebar upload
 st.sidebar.header("📂 Upload File")
-inv_file = st.sidebar.file_uploader("Invoice (CSV/XLSX)", type=["csv", "xlsx"])
-bank_file = st.sidebar.file_uploader("Rekening Koran (CSV/XLSX)", type=["csv", "xlsx"])
+inv_file = st.sidebar.file_uploader("Upload Invoice (CSV/XLSX)", type=["csv", "xlsx"])
+bank_file = st.sidebar.file_uploader("Upload Rekening Koran (CSV/XLSX)", type=["csv", "xlsx"])
 
 @st.cache_data
 def load_file(file):
@@ -60,7 +64,6 @@ if inv_file and bank_file:
     df_inv = load_file(inv_file)
     df_bank = load_file(bank_file)
 
-    # Normalisasi kolom
     for df in [df_inv, df_bank]:
         df.columns = df.columns.str.lower().str.strip()
 
@@ -72,7 +75,6 @@ if inv_file and bank_file:
     df_inv['amount'] = df_inv['amount'].astype(float)
     df_bank['amount'] = df_bank['amount'].astype(float)
 
-    # Rekonsiliasi
     matched = []
     unmatched_inv = df_inv.copy()
     unmatched_bank = df_bank.copy()
@@ -96,17 +98,30 @@ if inv_file and bank_file:
 
     df_matched = pd.DataFrame(matched)
 
-    # Tampilkan hasil
-    st.subheader("✅ Transaksi Cocok")
-    st.dataframe(df_matched, use_container_width=True)
+    st.markdown("---")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Transaksi Cocok", len(df_matched))
+    col2.metric("Invoice Belum Dibayar", len(unmatched_inv))
+    col3.metric("Transaksi Bank Tidak Sesuai", len(unmatched_bank))
 
-    with st.expander("❌ Invoice Tidak Terbayar"):
+    # Visualisasi
+    chart_data = pd.DataFrame({
+        "Kategori": ["Matched", "Unmatched Invoice", "Unmatched Bank"],
+        "Jumlah": [len(df_matched), len(unmatched_inv), len(unmatched_bank)]
+    })
+    fig = px.pie(chart_data, names='Kategori', values='Jumlah', title='Distribusi Transaksi')
+    st.plotly_chart(fig, use_container_width=True)
+
+    tab1, tab2, tab3 = st.tabs(["✅ Matched", "❌ Unmatched Invoice", "❌ Unmatched Bank"])
+
+    with tab1:
+        st.dataframe(df_matched, use_container_width=True)
+    with tab2:
         st.dataframe(unmatched_inv, use_container_width=True)
-
-    with st.expander("❌ Transaksi Bank Tidak Sesuai"):
+    with tab3:
         st.dataframe(unmatched_bank, use_container_width=True)
 
-    # Unduh hasil rekonsiliasi
+    # Unduh Excel
     buffer = BytesIO()
     with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
         df_matched.to_excel(writer, sheet_name="Matched", index=False)
@@ -115,10 +130,10 @@ if inv_file and bank_file:
         writer.close()
 
     st.download_button(
-        label="💾 Unduh Hasil Rekonsiliasi",
+        label="💾 Unduh Hasil Rekonsiliasi (Excel)",
         data=buffer.getvalue(),
         file_name="rekonsiliasi_hasil.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 else:
-    st.info("Silakan upload file invoice dan rekening koran terlebih dahulu.")
+    st.warning("Silakan upload file invoice dan rekening koran untuk memulai.")
