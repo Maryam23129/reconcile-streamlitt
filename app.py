@@ -34,11 +34,23 @@ section[data-testid="stSidebar"] {
 h1, h2, h3 {
     color: #1a2530;
 }
+.sidebar-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # ===================== Sidebar Upload =====================
-st.sidebar.title("📥 Upload File")
+st.sidebar.markdown("""
+<div class="sidebar-logo">
+    <img src="https://asset.kompas.com/crops/cUhByUGMnBuExD4m0UXSYWAsDFU=/0x0:780x520/750x500/data/photo/2022/07/07/62c6c95b30eaa.png" width="120"/>
+    <h3 style='text-align: center;'>PT ASDP Indonesia Ferry</h3>
+</div>
+""", unsafe_allow_html=True)
+
 st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
 inv_file = st.sidebar.file_uploader("File Invoice (CSV/XLSX)", type=["csv", "xlsx"], key="invoice")
 bank_file = st.sidebar.file_uploader("File Rekening Koran (CSV/XLSX)", type=["csv", "xlsx"], key="bank")
