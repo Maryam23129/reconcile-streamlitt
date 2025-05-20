@@ -30,6 +30,7 @@ section[data-testid="stSidebar"] {
     border-right: 2px solid #003366;
     padding: 1rem;
     border-radius: 0 15px 15px 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 @keyframes gradientShift {
   0% {background-position: 0% 50%;}
