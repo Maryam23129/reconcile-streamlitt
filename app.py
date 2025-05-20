@@ -34,7 +34,7 @@ h1, h2, h3 {
 """, unsafe_allow_html=True)
 
 # ===================== Header =====================
-st.title("📊 Dashboard Rekonsiliasi Pendapatan Ticketing Keuangan")
+st.title("📊 Dashboard Rekonsiliasi Pendapatan Ticketing")
 st.markdown("""
 Selamat datang di aplikasi rekonsiliasi keuangan.
 Bandingkan file invoice dan rekening koran Anda untuk menemukan transaksi yang cocok dan tidak cocok.
