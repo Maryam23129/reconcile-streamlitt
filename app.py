@@ -24,8 +24,17 @@ section[data-testid="stSidebar"] {
     font-size: 16px;
     line-height: 1.6;
     background: linear-gradient(135deg, #a8edea, #61a0af);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
     color: #ffffff;
     border-right: 2px solid #003366;
+    padding: 1rem;
+    border-radius: 0 15px 15px 0;
+}
+@keyframes gradientShift {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 section[data-testid="stSidebar"] .stButton>button, .stDownloadButton>button {
     background-color: #005f73;
@@ -177,4 +186,4 @@ if inv_file and bank_file:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 else:
-    st.warning("Silakan upload kedua file dari sidebar untuk memulai.")
+    st.warning("Silakan upload kedua file dari sidebar untuk m
