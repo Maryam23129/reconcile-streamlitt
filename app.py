@@ -186,4 +186,4 @@ if inv_file and bank_file:
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 else:
-    st.warning("Silakan upload kedua file dari sidebar untuk m
+    st.warning("Silakan upload kedua file dari sidebar untuk memulai.")
