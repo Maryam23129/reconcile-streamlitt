@@ -19,7 +19,7 @@ body {
     color: #2c3e50;
 }
 section[data-testid="stSidebar"] {
-    background: linear-gradient(135deg, #fceabb, #f8b500);
+    background: linear-gradient(135deg, #a8edea, #61a0af);
     color: #000;
 }
 .stButton>button, .stDownloadButton>button {
@@ -45,10 +45,7 @@ h1, h2, h3 {
 
 # ===================== Sidebar Upload =====================
 st.sidebar.markdown("""
-<div class="sidebar-logo">
-    <img src="https://asset.kompas.com/crops/cUhByUGMnBuExD4m0UXSYWAsDFU=/0x0:780x520/750x500/data/photo/2022/07/07/62c6c95b30eaa.png" width="120"/>
-    <h3 style='text-align: center;'>PT ASDP Indonesia Ferry</h3>
-</div>
+
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
