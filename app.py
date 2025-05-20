@@ -13,9 +13,10 @@ st.set_page_config(
 # ===================== Custom CSS =====================
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 body {
     background-color: #f2f4f8;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: #2c3e50;
 }
 section[data-testid="stSidebar"] {
@@ -25,6 +26,7 @@ section[data-testid="stSidebar"] {
     color: #000;
 }
 .stButton>button, .stDownloadButton>button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
     background-color: #4CAF50;
     color: white;
     font-weight: 600;
@@ -41,6 +43,10 @@ h1, h2, h3 {
     flex-direction: column;
     align-items: center;
     padding-bottom: 1rem;
+}
+.stButton>button:hover, .stDownloadButton>button:hover {
+    background-color: #45a049;
+    transform: scale(1.03);
 }
 </style>
 """, unsafe_allow_html=True)
