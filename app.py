@@ -23,7 +23,7 @@ section[data-testid="stSidebar"] {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    background: linear-gradient(145deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF);
+    background: linear-gradient(135deg, #a8edea, #61a0af);
     color: #ffffff;
     border-right: 2px solid #003366;
 }
@@ -72,10 +72,10 @@ st.sidebar.markdown("""""", unsafe_allow_html=True)
 st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
 if st.sidebar.button("🔄 Reset File Upload"):
     st.experimental_rerun()
-inv_file = st.sidebar.file_uploader("📂 Upload File Invoice", type=["csv", "xlsx"], key="invoice")
+inv_file = st.sidebar.file_uploader("📄 Upload File Invoice", type=["csv", "xlsx"], key="invoice")
 if inv_file:
     st.sidebar.markdown(f"✅ File invoice: `{inv_file.name}`")
-bank_file = st.sidebar.file_uploader("📂 Upload File Rekening Koran", type=["csv", "xlsx"], key="bank")
+bank_file = st.sidebar.file_uploader("🏦 Upload File Rekening Koran", type=["csv", "xlsx"], key="bank")
 if bank_file:
     st.sidebar.markdown(f"✅ File rekening: `{bank_file.name}`")
 
