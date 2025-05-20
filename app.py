@@ -46,8 +46,8 @@ h1, h2, h3 {
 # ===================== Sidebar Upload =====================
 st.sidebar.markdown("""
 <div class="sidebar-logo">
-    <img src="https://upload.wikimedia.org/wikipedia/id/7/75/ASDP_Indonesia_Ferry_logo.png" width="120"/>
-    <h3 style='text-align: center;'>PT. ASDP Indonesia Ferry</h3>
+    <img src="https://asset.kompas.com/crops/cUhByUGMnBuExD4m0UXSYWAsDFU=/0x0:780x520/750x500/data/photo/2022/07/07/62c6c95b30eaa.png" width="120"/>
+    <h3 style='text-align: center;'>PT ASDP Indonesia Ferry</h3>
 </div>
 """, unsafe_allow_html=True)
 
