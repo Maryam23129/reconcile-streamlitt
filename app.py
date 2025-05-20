@@ -14,10 +14,10 @@ st.set_page_config(
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-body {
-    background-color: #001f3f;
+html, body, [class*="css"]  {
+    background-color: #001f3f !important;
     font-family: 'Inter', sans-serif;
-    color: #2c3e50;
+    color: #f0f0f0;
 }
 section[data-testid="stSidebar"] {
     font-family: 'Roboto', sans-serif;
@@ -40,7 +40,7 @@ h1, h2, h3 {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     letter-spacing: -0.5px;
-    color: #1a2530;
+    color: #ffffff;
 }
 .sidebar-logo {
     display: flex;
