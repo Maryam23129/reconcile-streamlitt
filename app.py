@@ -49,8 +49,14 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
-inv_file = st.sidebar.file_uploader("File Invoice (CSV/XLSX)", type=["csv", "xlsx"], key="invoice")
-bank_file = st.sidebar.file_uploader("File Rekening Koran (CSV/XLSX)", type=["csv", "xlsx"], key="bank")
+if st.sidebar.button("🔄 Reset File Upload"):
+    st.experimental
+inv_file = st.sidebar.file_uploader("📄 Upload File Invoice", type=["csv", "xlsx"], key="invoice")
+if inv_file:
+    st.sidebar.markdown(f"✅ File invoice: `{inv_file.name}`")
+bank_file = st.sidebar.file_uploader("🏦 Upload File Rekening Koran", type=["csv", "xlsx"], key="bank")
+if bank_file:
+    st.sidebar.markdown(f"✅ File rekening: `{bank_file.name}`")
 
 # ===================== Header =====================
 st.title("📊 Dashboard Rekonsiliasi Keuangan")
