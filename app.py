@@ -22,6 +22,7 @@ body {
 section[data-testid="stSidebar"] {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    line-height: 1.6;
     background: linear-gradient(135deg, #a8edea, #61a0af);
     color: #000;
 }
@@ -36,6 +37,9 @@ section[data-testid="stSidebar"] {
     margin-top: 1em;
 }
 h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
     color: #1a2530;
 }
 .sidebar-logo {
