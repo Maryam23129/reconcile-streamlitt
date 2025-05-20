@@ -14,12 +14,12 @@ st.set_page_config(
 st.markdown("""
 <style>
 html, body, [class*="css"]  {
-    background-color: #fdf6f0;
+    background-color: #f7f1f0;
     font-family: 'Segoe UI', sans-serif;
-    color: #333;
+    color: #444;
 }
 .stButton>button {
-    background-color: #ffdcdc;
+    background-color: #ffd1dc;
     color: black;
     border: none;
     border-radius: 8px;
