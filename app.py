@@ -23,7 +23,7 @@ section[data-testid="stSidebar"] {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    background: #011627;
+    background: linear-gradient(145deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF);
     color: #ffffff;
     border-right: 2px solid #003366;
 }
@@ -166,15 +166,4 @@ if inv_file and bank_file:
     buffer = BytesIO()
     with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
         df_matched.to_excel(writer, sheet_name="Matched", index=False)
-        unmatched_inv.to_excel(writer, sheet_name="Unmatched_Invoice", index=False)
-        unmatched_bank.to_excel(writer, sheet_name="Unmatched_Bank", index=False)
-        writer.close()
-
-    st.download_button(
-        label="💾 Unduh Hasil Rekonsiliasi (Excel)",
-        data=buffer.getvalue(),
-        file_name="rekonsiliasi_hasil.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
-else:
-    st.warning("Silakan upload kedua file dari sidebar untuk memulai.")
+        unmatched_inv.to_excel(writer, sheet_name="Un
