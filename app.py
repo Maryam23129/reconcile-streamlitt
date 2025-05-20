@@ -43,7 +43,7 @@ html, body, [class*="css"]  {
 </style>
 """, unsafe_allow_html=True)
 
-st.title("📊 Dashboard Rekonsiliasi Pendapatan Ticketing")
+st.title("📊 Dashboard Rekonsiliasi Keuangan")
 st.markdown("""
 Bandingkan dan cocokkan transaksi dari data Invoice dan Rekening Koran secara otomatis. 
 Gunakan grafik dan tab untuk menganalisis transaksi yang cocok dan yang belum.
