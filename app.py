@@ -38,7 +38,7 @@ html, body, [class*="css"]  {
 """, unsafe_allow_html=True)
 
 # Header utama
-st.title("📊 Aplikasi Rekonsiliasi Keuangan")
+st.title("📊 Aplikasi Rekonsiliasi Pendapatan Ticketing")
 st.markdown("""
 Aplikasi ini membandingkan data **invoice** dan **rekening koran**,
 mendeteksi transaksi yang cocok dan yang tidak sesuai.
