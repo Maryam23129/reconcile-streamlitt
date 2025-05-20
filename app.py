@@ -19,6 +19,8 @@ body {
     color: #2c3e50;
 }
 section[data-testid="stSidebar"] {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     background: linear-gradient(135deg, #a8edea, #61a0af);
     color: #000;
 }
@@ -50,7 +52,7 @@ st.sidebar.markdown("""
 
 st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
 if st.sidebar.button("🔄 Reset File Upload"):
-    st.experimental
+    st.experimental_rerun()
 inv_file = st.sidebar.file_uploader("📄 Upload File Invoice", type=["csv", "xlsx"], key="invoice")
 if inv_file:
     st.sidebar.markdown(f"✅ File invoice: `{inv_file.name}`")
