@@ -56,9 +56,7 @@ h1, h2, h3 {
 """, unsafe_allow_html=True)
 
 # ===================== Sidebar Upload =====================
-st.sidebar.markdown("""
-
-""", unsafe_allow_html=True)
+st.sidebar.markdown("""""", unsafe_allow_html=True)
 
 st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
 if st.sidebar.button("🔄 Reset File Upload"):
