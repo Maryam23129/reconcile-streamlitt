@@ -18,6 +18,10 @@ body {
     font-family: 'Segoe UI', sans-serif;
     color: #2c3e50;
 }
+section[data-testid="stSidebar"] {
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    color: #000;
+}
 .stButton>button, .stDownloadButton>button {
     background-color: #4CAF50;
     color: white;
@@ -33,27 +37,24 @@ h1, h2, h3 {
 </style>
 """, unsafe_allow_html=True)
 
+# ===================== Sidebar Upload =====================
+st.sidebar.title("📥 Upload File")
+st.sidebar.markdown("Silakan unggah file invoice dan rekening koran Anda.")
+inv_file = st.sidebar.file_uploader("File Invoice (CSV/XLSX)", type=["csv", "xlsx"], key="invoice")
+bank_file = st.sidebar.file_uploader("File Rekening Koran (CSV/XLSX)", type=["csv", "xlsx"], key="bank")
+
 # ===================== Header =====================
-st.title("📊 Dashboard Rekonsiliasi Pendapatan Ticketing")
+st.title("📊 Dashboard Rekonsiliasi Keuangan")
 st.markdown("""
-Selamat datang di aplikasi rekonsiliasi keuangan.
 Bandingkan file invoice dan rekening koran Anda untuk menemukan transaksi yang cocok dan tidak cocok.
 """)
 
-# ===================== Instructions =====================
 with st.expander("📘 Cara Menggunakan Aplikasi", expanded=False):
     st.markdown("""
-    - Siapkan dua file (CSV/XLSX) untuk invoice dan rekening koran
     - Kolom wajib: `tanggal`, `nominal`, dan `deskripsi`
-    - Upload file di bawah
+    - Upload file dari sidebar
     - Lihat hasil rekonsiliasi dan unduh Excel hasilnya
     """)
-
-# ===================== Upload Section =====================
-st.header("📥 Upload Data")
-col1, col2 = st.columns(2)
-inv_file = col1.file_uploader("File Invoice", type=["csv", "xlsx"], key="invoice")
-bank_file = col2.file_uploader("File Rekening Koran", type=["csv", "xlsx"], key="bank")
 
 @st.cache_data
 def load_file(file):
@@ -61,7 +62,7 @@ def load_file(file):
         return pd.read_csv(file)
     return pd.read_excel(file)
 
-# ===================== Process Logic =====================
+# ===================== Proses =====================
 if inv_file and bank_file:
     df_inv = load_file(inv_file)
     df_bank = load_file(bank_file)
@@ -100,7 +101,7 @@ if inv_file and bank_file:
 
     df_matched = pd.DataFrame(matched)
 
-    # ===================== Summary =====================
+    # ===================== Ringkasan =====================
     st.header("📈 Ringkasan Rekonsiliasi")
     col1, col2, col3 = st.columns(3)
     col1.metric("Transaksi Cocok", len(df_matched))
@@ -114,7 +115,7 @@ if inv_file and bank_file:
     fig = px.pie(chart_data, names='Kategori', values='Jumlah', title='Distribusi Transaksi')
     st.plotly_chart(fig, use_container_width=True)
 
-    # ===================== Data Tabs =====================
+    # ===================== Tab Data =====================
     st.header("📋 Detail Transaksi")
     tab1, tab2, tab3 = st.tabs(["✅ Matched", "❌ Invoice Belum Dibayar", "❌ Transaksi Bank Tidak Sesuai"])
 
@@ -125,7 +126,7 @@ if inv_file and bank_file:
     with tab3:
         st.dataframe(unmatched_bank, use_container_width=True)
 
-    # ===================== Download =====================
+    # ===================== Unduh =====================
     buffer = BytesIO()
     with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
         df_matched.to_excel(writer, sheet_name="Matched", index=False)
@@ -139,6 +140,5 @@ if inv_file and bank_file:
         file_name="rekonsiliasi_hasil.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-
 else:
-    st.warning("Silakan upload kedua file untuk memulai proses rekonsiliasi.")
+    st.warning("Silakan upload kedua file dari sidebar untuk memulai.")
